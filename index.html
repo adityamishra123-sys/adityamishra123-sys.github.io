@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A's PATHSHALA - Master Mathematics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff6b35;
+            --secondary: #ffd700;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --text: #333;
+            --text-light: #666;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --light: #0f0f1e;
+                --text: #e0e0e0;
+                --text-light: #aaa;
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: white;
+            color: var(--text);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #0f0f1e;
+                color: var(--text);
+            }
+        }
+
+        /* NAV */
+        nav {
+            background: linear-gradient(135deg, var(--dark), #16213e);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .logo-circle {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--secondary);
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--primary) 100%);
+            background-size: 200% 200%;
+            animation: gradientMove 8s ease infinite;
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .btn-main {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 0.9rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* TEACHER */
+        .teacher {
+            padding: 3rem 2rem;
+            background: var(--light);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--text);
+            margin-bottom: 2rem;
+        }
+
+        .teacher-card {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .teacher-card {
+                background: #1a1a2e;
+            }
+        }
+
+        .teacher-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .avatar {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .teacher-name {
+            font-size: 1.6rem;
+            color: var(--primary);
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .teacher-title {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .teacher-bio {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        /* QUOTES */
+        .quotes {
+            padding: 3rem 2rem;
+            background: white;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .quotes {
+                background: #0f0f1e;
+            }
+        }
+
+        .quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .quote:hover {
+            transform: translateY(-3px);
+        }
+
+        /* PLAYLISTS */
+        .playlists {
+            padding: 3rem 2rem;
+            background: var(--light);
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 0.7rem 1.5rem;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .tab {
+                background: #0f0f1e;
+                border-color: #333;
+                color: var(--text);
+            }
+        }
+
+        .tab:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .card {
+                background: #1a1a2e;
+            }
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-count {
+            font-size: 0.8rem;
+            background: rgba(255,255,255,0.3);
+            display: inline-block;
+            padding: 0.2rem 0.7rem;
+            border-radius: 12px;
+        }
+
+        .card-body {
+            padding: 1.2rem;
+        }
+
+        .card-desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .btn-card {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .btn-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,107,53,0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.show {
+            display: block;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            border-top: 3px solid var(--primary);
+        }
+
+        footer p {
+            margin-bottom: 1rem;
+        }
+
+        footer a {
+            color: var(--secondary);
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            nav a {
+                margin-left: 1rem;
+                font-size: 0.9rem;
+            }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAV -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <div class="logo-circle">A</div>
+                <span>A's PATHSHALA</span>
+            </div>
+            <div>
+                <a href="#home">Home</a>
+                <a href="#teacher">Teacher</a>
+                <a href="#quotes">Quotes</a>
+                <a href="#courses">Courses</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Master Mathematics Like Never Before</h1>
+            <p>Complete guidance for Class 9, 10, 11 & 12 with Abhinav Sir</p>
+            <a href="https://www.youtube.com/@A_PATHSHALA" target="_blank" class="btn-main">Subscribe on YouTube</a>
+        </div>
+    </section>
+
+    <!-- TEACHER -->
+    <section class="teacher" id="teacher">
+        <div class="container">
+            <h2 class="section-title">Meet Your Instructor</h2>
+            <div class="teacher-card">
+                <div class="avatar">👨‍🏫</div>
+                <div class="teacher-name">Abhinav Sir</div>
+                <div class="teacher-title">Mathematics Expert & Educator</div>
+                <div class="teacher-bio">
+                    Experienced educator with a passion for making mathematics simple and understandable. Helping thousands of students excel in their board exams and competitive tests.
+                </div>
+                <a href="https://www.youtube.com/@A_PATHSHALA" target="_blank" class="btn-main">Follow Channel</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUOTES -->
+    <section class="quotes" id="quotes">
+        <div class="container">
+            <h2 class="section-title">Mathematics Wisdom</h2>
+            <div class="quotes-grid">
+                <div class="quote">"Mathematics is the language in which God has written the universe." - Galileo</div>
+                <div class="quote">"In mathematics, you don't understand things. You just get used to them." - John von Neumann</div>
+                <div class="quote">"Pure mathematics is the poetry of logical ideas." - Albert Einstein</div>
+                <div class="quote">"A mathematician is a maker of patterns." - G.H. Hardy</div>
+                <div class="quote">"Mathematics is beautiful creation of the human spirit." - Stefan Banach</div>
+                <div class="quote">"The greatest pleasure is doing what people say you cannot do." - Walter Bagehot</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COURSES -->
+    <section class="playlists" id="courses">
+        <div class="container">
+            <h2 class="section-title">Explore Our Courses</h2>
+            
+            <div class="tabs">
+                <button class="tab active" onclick="showClass('c10')">Class 10</button>
+                <button class="tab" onclick="showClass('c11')">Class 11</button>
+                <button class="tab" onclick="showClass('c12')">Class 12</button>
+                <button class="tab" onclick="showClass('c9')">Class 9</button>
+            </div>
+
+            <!-- CLASS 10 -->
+            <div id="c10" class="tab-content show">
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">ℝ</div>
+                            <div class="card-title">Real Numbers</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Master rational & irrational numbers with complete concept explanation.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhG1BH1mJMi-KhSH5ITipZZW')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">P(x)</div>
+                            <div class="card-title">Polynomials</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Zeros, coefficients, division algorithm explained clearly.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhGzX0FuQzzMweuAUfuDK5W8')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">x²</div>
+                            <div class="card-title">Quadratic Equations</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Solutions, roots, discriminant with practical applications.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhFMe6UJDRqRI9R4X-euUUSE')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📈</div>
+                            <div class="card-title">Arithmetic Progression</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">AP series, nth term, sum formula with important questions.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhGIHpNpiD3X7m6JU6sEcUsW')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📊</div>
+                            <div class="card-title">Linear Equations</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Pair of linear equations with graphical and algebraic methods.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhGZ-fKyKDzg0dpRSd0pw3sB')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📍</div>
+                            <div class="card-title">Coordinate Geometry</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Distance formula, section formula with complete solutions.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhFGoheSqU0AVUS11-3mPnML')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">△</div>
+                            <div class="card-title">Triangles</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Similar triangles and congruence concepts with proofs.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEUMvwh5UKA9mZ-Tv9a89Wo')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">∠</div>
+                            <div class="card-title">Trigonometry</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Ratios, identities with practical height & distance problems.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEQ9b8V6aqk_XgOKuf8-oqo')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">🎲</div>
+                            <div class="card-title">Probability</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Sample space and events with important exam questions.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEBVvjWTJpTRojYlgGtNmym')">Watch →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CLASS 11 -->
+            <div id="c11" class="tab-content">
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">ℂ</div>
+                            <div class="card-title">Complex Numbers</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Complex numbers and argand plane explained clearly.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhHhWj6oGtbi-jP1XIw7tUUC')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">∠</div>
+                            <div class="card-title">Trigonometry</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Trigonometric functions and identities covered.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhF_iQ9_eFTPCL7XircRrO0Y')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">⧖</div>
+                            <div class="card-title">3D Geometry</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">3D space with direction cosines and formulas.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhGa6jFlBtTJ2hiZ36D52z_q')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">≤</div>
+                            <div class="card-title">Linear Inequalities</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Solving inequalities graphically with solutions.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEeI2rsisMpRFFrzsYcmjgt')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📐</div>
+                            <div class="card-title">Straight Lines</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Equation of lines and slopes completely covered.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhE7VjR8T6xBUMnyL79iMrO_')">Watch →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CLASS 12 -->
+            <div id="c12" class="tab-content">
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">∫</div>
+                            <div class="card-title">Integration</div>
+                            <div class="card-count">13 Videos</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Indefinite integrals with standard formulas.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhFS-N34Biv0uzzuuu0HLSoG')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">∂</div>
+                            <div class="card-title">Differential Equations</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Types of solutions with general methods explained.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhHP5O9eamNxk-RpObgkXmYf')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">d/dx</div>
+                            <div class="card-title">Applications of Derivatives</div>
+                            <div class="card-count">9 Videos</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Maxima and minima with exam applications.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhF7RPyw7xgrFlrXVBNvGstz')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">f'(x)</div>
+                            <div class="card-title">Calculus & Differentiability</div>
+                            <div class="card-count">9 Videos</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Derivatives and differentiability for board exams.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEigQ8k-1Fa2MxX-r9rkmpp')">Watch →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CLASS 9 -->
+            <div id="c9" class="tab-content">
+                <div class="grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📊</div>
+                            <div class="card-title">Statistics</div>
+                            <div class="card-count">Complete</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Mean, median, mode with complete explanations.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhHYdN8xEk0Gpa2d9rfJN2pG')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">△</div>
+                            <div class="card-title">Triangles</div>
+                            <div class="card-count">7 Videos</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Triangle properties and congruence concepts.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhE_WOOS2AeSoYHJXfDzy93h')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📐</div>
+                            <div class="card-title">Quadrilaterals</div>
+                            <div class="card-count">9 Videos</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Properties and angle sum completely covered.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhHBEXlci0c_QvGG-rHRAdj0')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">⟂</div>
+                            <div class="card-title">Lines & Angles</div>
+                            <div class="card-count">6 Videos</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Intersecting and parallel lines with solutions.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhFZT0WfiU9db4pNVufiG_gn')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">⭕</div>
+                            <div class="card-title">Circles</div>
+                            <div class="card-count">8 Videos</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Circle properties and theorems with solutions.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhFL9Q5Q_t1FuHYablGvOlu-')">Watch →</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-icon">📏</div>
+                            <div class="card-title">Area of Parallelogram & Triangles</div>
+                            <div class="card-count">3 Videos</div>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-desc">Area calculations with important formulas.</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhFwXkj01aBtsiqR2W8OVXg_')">Watch →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 A's PATHSHALA - Taught by Abhinav Sir</p>
+        <div>
+            <a href="https://www.youtube.com/@A_PATHSHALA" target="_blank">YouTube Channel</a>
+            <a href="#" onclick="downloadHTML(); return false;">📥 Download Website</a>
+        </div>
+    </footer>
+
+    <script>
+        // Show class tabs
+        function showClass(classId) {
+            // Hide all tabs
+            const allTabs = document.querySelectorAll('.tab-content');
+            allTabs.forEach(tab => tab.classList.remove('show'));
+            
+            // Show selected tab
+            document.getElementById(classId).classList.add('show');
+            
+            // Update button active state
+            const allButtons = document.querySelectorAll('.tab');
+            allButtons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Open YouTube
+        function goYT(playlistId) {
+            const url = 'https://www.youtube.com/playlist?list=' + playlistId;
+            window.open(url, '_blank');
+        }
+
+        // Download HTML
+        function downloadHTML() {
+            const html = document.documentElement.outerHTML;
+            const blob = new Blob([html], { type: 'text/html' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'AsPathshala-Website.html';
+            link.click();
+        }
+    </script>
+</body>
+</html>
