@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Aditya Mishra">
+    <meta name="copyright" content="© 2026 A's PATHSHALA. All rights reserved.">
     <title>A's PATHSHALA - Master Mathematics</title>
+</head>
+
     <style>
         * {
             margin: 0;
@@ -775,7 +779,7 @@
         <p>&copy; 2025 A's PATHSHALA - Taught by Abhinav Sir</p>
         <div>
             <a href="https://www.youtube.com/@A_PATHSHALA" target="_blank">YouTube Channel</a>
-            <a href="#" onclick="downloadHTML(); return false;">📥 Download Website</a>
+          
         </div>
     </footer>
 
@@ -801,15 +805,28 @@
             window.open(url, '_blank');
         }
 
-        // Download HTML
-        function downloadHTML() {
-            const html = document.documentElement.outerHTML;
-            const blob = new Blob([html], { type: 'text/html' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = 'AsPathshala-Website.html';
-            link.click();
-        }
+      
     </script>
+    <script>
+(function () {
+  // Disable right click
+  document.addEventListener('contextmenu', function (e) {
+    e.preventDefault();
+  });
+
+  // Disable inspect & view source shortcuts
+  document.addEventListener('keydown', function (e) {
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && ['I', 'C', 'J'].includes(e.key)) ||
+      (e.ctrlKey && e.key === 'U')
+    ) {
+      e.preventDefault();
+      return false;
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
