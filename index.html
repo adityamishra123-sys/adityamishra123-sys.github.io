@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="author" content="Aditya Mishra">
-    <meta name="copyright" content="© 2026 A's PATHSHALA. All rights reserved.">
     <title>A's PATHSHALA - Master Mathematics</title>
 </head>
-
+<body>
     <style>
         * {
             margin: 0;
@@ -16,45 +14,50 @@
         }
 
         :root {
-            --primary: #ff6b35;
-            --secondary: #ffd700;
-            --dark: #1a1a2e;
-            --light: #f8f9fa;
-            --text: #333;
-            --text-light: #666;
+            --time: 12;
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --light: #0f0f1e;
-                --text: #e0e0e0;
-                --text-light: #aaa;
-            }
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: white;
-            color: var(--text);
-            line-height: 1.6;
-            transition: background 0.3s, color 0.3s;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            transition: background 1s ease;
         }
 
-        @media (prefers-color-scheme: dark) {
-            body {
-                background: #0f0f1e;
-                color: var(--text);
-            }
+        /* ANIMATED BACKGROUND */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         /* NAV */
         nav {
-            background: linear-gradient(135deg, var(--dark), #16213e);
-            padding: 1rem 2rem;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 2rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         nav .container {
@@ -68,354 +71,459 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 8px;
-            color: var(--primary);
-            font-size: 1.3rem;
-            font-weight: bold;
+            gap: 12px;
+            color: white;
+            font-size: 1.4rem;
+            font-weight: 900;
+            letter-spacing: -1px;
         }
 
         .logo-circle {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #ff6b6b, #ffd700);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--dark);
+            color: white;
             font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 0 20px rgba(255, 107, 107, 0.6);
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.6); }
+            50% { box-shadow: 0 0 30px rgba(255, 107, 107, 0.9); }
         }
 
         nav a {
-            color: white;
+            color: #fff;
             text-decoration: none;
-            margin-left: 2rem;
-            font-weight: 500;
-            transition: color 0.3s;
+            margin-left: 2.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+            position: relative;
         }
 
-        nav a:hover {
-            color: var(--secondary);
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ff6b6b, #ffd700);
+            transition: width 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         /* HERO */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--primary) 100%);
-            background-size: 200% 200%;
-            animation: gradientMove 8s ease infinite;
-            color: white;
-            padding: 5rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes gradientMove {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255, 107, 107, 0.2);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -5%;
+            width: 500px;
+            height: 500px;
+            background: rgba(35, 213, 171, 0.2);
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(30px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 900px;
         }
 
         .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 0.5rem;
-            font-weight: 800;
+            font-size: 4.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            font-weight: 900;
+            line-height: 1.1;
+            text-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 2.5rem;
+            animation: slideUp 0.8s ease 0.2s backwards;
         }
 
         .btn-main {
             display: inline-block;
-            background: white;
-            color: var(--primary);
-            padding: 0.9rem 2rem;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: white;
+            padding: 1.2rem 3rem;
             border: none;
-            border-radius: 30px;
-            font-weight: bold;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
             cursor: pointer;
             text-decoration: none;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            animation: slideUp 0.8s ease 0.4s backwards;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: left 0.3s;
+        }
+
+        .btn-main:hover::before {
+            left: 100%;
         }
 
         .btn-main:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
         }
 
-        /* CONTAINER */
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
         }
 
-        /* TEACHER */
+        /* TEACHER SECTION */
         .teacher {
-            padding: 3rem 2rem;
-            background: var(--light);
+            padding: 5rem 2rem;
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
         .section-title {
-            font-size: 2.2rem;
-            font-weight: bold;
-            color: var(--text);
-            margin-bottom: 2rem;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: 3rem;
+            text-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
         .teacher-card {
-            max-width: 400px;
+            max-width: 500px;
             margin: 0 auto;
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .teacher-card {
-                background: #1a1a2e;
-            }
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .teacher-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-15px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
         }
 
         .avatar {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: bounce 3s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
 
         .teacher-name {
-            font-size: 1.6rem;
-            color: var(--primary);
-            font-weight: bold;
-            margin-bottom: 0.3rem;
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ff6b6b, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
         }
 
         .teacher-title {
-            color: var(--text-light);
-            margin-bottom: 1rem;
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
         }
 
         .teacher-bio {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 1rem;
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
         }
 
-        /* QUOTES */
+        /* QUOTES SECTION */
         .quotes {
-            padding: 3rem 2rem;
-            background: white;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .quotes {
-                background: #0f0f1e;
-            }
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 2;
         }
 
         .quotes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
         }
 
         .quote {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             color: white;
-            padding: 1.5rem;
-            border-radius: 10px;
+            padding: 2.5rem;
+            border-radius: 20px;
             font-style: italic;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .quote:hover {
-            transform: translateY(-3px);
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
         }
 
-        /* PLAYLISTS */
+        /* COURSES SECTION */
         .playlists {
-            padding: 3rem 2rem;
-            background: var(--light);
+            padding: 5rem 2rem;
+            position: relative;
+            z-index: 2;
         }
 
         .tabs {
             display: flex;
             justify-content: center;
             gap: 1rem;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             flex-wrap: wrap;
         }
 
         .tab {
-            padding: 0.7rem 1.5rem;
-            background: white;
-            border: 2px solid #ddd;
-            border-radius: 20px;
+            padding: 0.9rem 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 30px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 700;
+            color: white;
             transition: all 0.3s;
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .tab {
-                background: #0f0f1e;
-                border-color: #333;
-                color: var(--text);
-            }
+            backdrop-filter: blur(10px);
         }
 
         .tab:hover {
-            border-color: var(--primary);
-            color: var(--primary);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.6);
+            transform: translateY(-5px);
         }
 
         .tab.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
+            background: linear-gradient(135deg, #ff6b6b, #ffd700);
+            border-color: transparent;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
         }
 
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
+            gap: 2.5rem;
+            margin-top: 2rem;
         }
 
         .card {
-            background: white;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            border-top: 4px solid var(--primary);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            .card {
-                background: #1a1a2e;
-            }
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.5);
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transform: translateY(-15px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
         }
 
         .card-header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #ff6b6b, #ffd700);
             color: white;
-            padding: 1.5rem;
+            padding: 2rem 1.5rem;
             text-align: center;
         }
 
         .card-icon {
-            font-size: 2.2rem;
-            margin-bottom: 0.5rem;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            animation: bounce 3s ease-in-out infinite;
         }
 
         .card-title {
-            font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: 0.3rem;
+            font-size: 1.2rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
         }
 
         .card-count {
-            font-size: 0.8rem;
-            background: rgba(255,255,255,0.3);
+            font-size: 0.85rem;
+            background: rgba(255, 255, 255, 0.3);
             display: inline-block;
-            padding: 0.2rem 0.7rem;
-            border-radius: 12px;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
         }
 
         .card-body {
-            padding: 1.2rem;
+            padding: 2rem;
         }
 
         .card-desc {
-            color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            line-height: 1.5;
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
         }
 
         .btn-card {
             display: inline-block;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
             color: white;
-            padding: 0.6rem 1.2rem;
+            padding: 0.8rem 1.8rem;
             border: none;
-            border-radius: 6px;
+            border-radius: 25px;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.95rem;
             transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
         }
 
         .btn-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255,107,53,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.5);
         }
 
         .tab-content {
             display: none;
+            animation: fadeIn 0.5s ease;
         }
 
         .tab-content.show {
             display: block;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* FOOTER */
         footer {
-            background: var(--dark);
+            background: rgba(15, 15, 35, 0.95);
             color: white;
-            padding: 2rem;
+            padding: 3rem 2rem;
             text-align: center;
-            border-top: 3px solid var(--primary);
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 2;
         }
 
         footer p {
             margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         footer a {
-            color: var(--secondary);
+            color: #ff6b6b;
             text-decoration: none;
             margin: 0 1rem;
-            font-weight: bold;
-            transition: color 0.3s;
+            font-weight: 700;
+            transition: all 0.3s;
         }
 
         footer a:hover {
-            color: var(--primary);
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
         }
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
             }
             nav a {
                 margin-left: 1rem;
-                font-size: 0.9rem;
+                font-size: 0.8rem;
             }
             .grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
-</head>
-<body>
+
     <!-- NAV -->
     <nav>
         <div class="container">
@@ -432,10 +540,13 @@
         </div>
     </nav>
 
+    <!-- ANIMATED BG -->
+    <div class="animated-bg"></div>
+
     <!-- HERO -->
     <section class="hero" id="home">
-        <div class="container">
-            <h1>Master Mathematics Like Never Before</h1>
+        <div class="hero-content">
+            <h1>🎓 Master Mathematics Like Never Before</h1>
             <p>Complete guidance for Class 9, 10, 11 & 12 with Abhinav Sir</p>
             <a href="https://www.youtube.com/@A_PATHSHALA" target="_blank" class="btn-main">Subscribe on YouTube</a>
         </div>
@@ -444,7 +555,7 @@
     <!-- TEACHER -->
     <section class="teacher" id="teacher">
         <div class="container">
-            <h2 class="section-title">Meet Your Instructor</h2>
+            <h2 class="section-title">🌟 Meet Your Instructor</h2>
             <div class="teacher-card">
                 <div class="avatar">👨‍🏫</div>
                 <div class="teacher-name">Abhinav Sir</div>
@@ -460,13 +571,13 @@
     <!-- QUOTES -->
     <section class="quotes" id="quotes">
         <div class="container">
-            <h2 class="section-title">Mathematics Wisdom</h2>
+            <h2 class="section-title">✨ Mathematics Wisdom</h2>
             <div class="quotes-grid">
                 <div class="quote">"Mathematics is the language in which God has written the universe." - Galileo</div>
                 <div class="quote">"In mathematics, you don't understand things. You just get used to them." - John von Neumann</div>
                 <div class="quote">"Pure mathematics is the poetry of logical ideas." - Albert Einstein</div>
                 <div class="quote">"A mathematician is a maker of patterns." - G.H. Hardy</div>
-                <div class="quote">"Mathematics is beautiful creation of the human spirit." - Stefan Banach</div>
+                <div class="quote">"Mathematics is a beautiful creation of the human spirit." - Stefan Banach</div>
                 <div class="quote">"The greatest pleasure is doing what people say you cannot do." - Walter Bagehot</div>
             </div>
         </div>
@@ -475,7 +586,7 @@
     <!-- COURSES -->
     <section class="playlists" id="courses">
         <div class="container">
-            <h2 class="section-title">Explore Our Courses</h2>
+            <h2 class="section-title">📚 Explore Our Courses</h2>
             
             <div class="tabs">
                 <button class="tab active" onclick="showClass('c10')">Class 10</button>
@@ -490,100 +601,100 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">ℝ</div>
-                            <div class="card-title">Real Numbers</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 1: Real Numbers</div>
+                            <div class="card-count">Euclid's Division</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">Master rational & irrational numbers with complete concept explanation.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhG1BH1mJMi-KhSH5ITipZZW')">Watch →</button>
+                            <p class="card-desc">Euclid's Division Lemma, Fundamental Theorem of Arithmetic, HCF & LCM</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhG1BH1mJMi-KhSH5ITipZZW')">Watch Playlist →</button>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">P(x)</div>
-                            <div class="card-title">Polynomials</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 2: Polynomials</div>
+                            <div class="card-count">Zeros & Factors</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">Zeros, coefficients, division algorithm explained clearly.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhGzX0FuQzzMweuAUfuDK5W8')">Watch →</button>
+                            <p class="card-desc">Polynomial zeros, Remainder Theorem, Factor Theorem, Division Algorithm</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhGzX0FuQzzMweuAUfuDK5W8')">Watch Playlist →</button>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">x²</div>
-                            <div class="card-title">Quadratic Equations</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 3: Quadratic Equations</div>
+                            <div class="card-count">Solutions & Roots</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">Solutions, roots, discriminant with practical applications.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhFMe6UJDRqRI9R4X-euUUSE')">Watch →</button>
+                            <p class="card-desc">Solving by factorization, quadratic formula, discriminant, nature of roots</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhFMe6UJDRqRI9R4X-euUUSE')">Watch Playlist →</button>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">📈</div>
-                            <div class="card-title">Arithmetic Progression</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 4: Arithmetic Progressions</div>
+                            <div class="card-count">AP Series</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">AP series, nth term, sum formula with important questions.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhGIHpNpiD3X7m6JU6sEcUsW')">Watch →</button>
+                            <p class="card-desc">AP definition, nth term, sum of n terms, common difference</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhGIHpNpiD3X7m6JU6sEcUsW')">Watch Playlist →</button>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">📊</div>
-                            <div class="card-title">Linear Equations</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 5: Linear Equations</div>
+                            <div class="card-count">Pair of Equations</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">Pair of linear equations with graphical and algebraic methods.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhGZ-fKyKDzg0dpRSd0pw3sB')">Watch →</button>
+                            <p class="card-desc">Graphical & algebraic methods, substitution, elimination, consistency</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhGZ-fKyKDzg0dpRSd0pw3sB')">Watch Playlist →</button>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">📍</div>
-                            <div class="card-title">Coordinate Geometry</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 6: Coordinate Geometry</div>
+                            <div class="card-count">Distance & Section</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">Distance formula, section formula with complete solutions.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhFGoheSqU0AVUS11-3mPnML')">Watch →</button>
+                            <p class="card-desc">Distance formula, section formula, area of triangle, collinearity</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhFGoheSqU0AVUS11-3mPnML')">Watch Playlist →</button>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">△</div>
-                            <div class="card-title">Triangles</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 7: Triangles</div>
+                            <div class="card-count">Similarity</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">Similar triangles and congruence concepts with proofs.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEUMvwh5UKA9mZ-Tv9a89Wo')">Watch →</button>
+                            <p class="card-desc">Similar triangles, criteria for similarity, theorems, congruence</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEUMvwh5UKA9mZ-Tv9a89Wo')">Watch Playlist →</button>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">∠</div>
-                            <div class="card-title">Trigonometry</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 8: Trigonometry</div>
+                            <div class="card-count">Ratios & Identities</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">Ratios, identities with practical height & distance problems.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEQ9b8V6aqk_XgOKuf8-oqo')">Watch →</button>
+                            <p class="card-desc">Trigonometric ratios, identities, heights & distances applications</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEQ9b8V6aqk_XgOKuf8-oqo')">Watch Playlist →</button>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">🎲</div>
-                            <div class="card-title">Probability</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 15: Probability</div>
+                            <div class="card-count">Basics</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">Sample space and events with important exam questions.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEBVvjWTJpTRojYlgGtNmym')">Watch →</button>
+                            <p class="card-desc">Sample space, favorable outcomes, classical probability approach</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEBVvjWTJpTRojYlgGtNmym')">Watch Playlist →</button>
                         </div>
                     </div>
                 </div>
@@ -595,56 +706,56 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">ℂ</div>
-                            <div class="card-title">Complex Numbers</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 5: Complex Numbers</div>
+                            <div class="card-count">Argand Plane</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">Complex numbers and argand plane explained clearly.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhHhWj6oGtbi-jP1XIw7tUUC')">Watch →</button>
+                            <p class="card-desc">Complex numbers, algebra of complex numbers, argand plane, modulus & argument</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhHhWj6oGtbi-jP1XIw7tUUC')">Watch Playlist →</button>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">∠</div>
-                            <div class="card-title">Trigonometry</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 3: Trigonometric Functions</div>
+                            <div class="card-count">Functions & Identities</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">Trigonometric functions and identities covered.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhF_iQ9_eFTPCL7XircRrO0Y')">Watch →</button>
+                            <p class="card-desc">Trigonometric functions, graphs, periodicity, trigonometric identities</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhF_iQ9_eFTPCL7XircRrO0Y')">Watch Playlist →</button>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">⧖</div>
-                            <div class="card-title">3D Geometry</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 12: 3D Geometry</div>
+                            <div class="card-count">Vectors & Space</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">3D space with direction cosines and formulas.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhGa6jFlBtTJ2hiZ36D52z_q')">Watch →</button>
+                            <p class="card-desc">Direction cosines, direction ratios, equation of line and plane in 3D</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhGa6jFlBtTJ2hiZ36D52z_q')">Watch Playlist →</button>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">≤</div>
-                            <div class="card-title">Linear Inequalities</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 6: Linear Inequalities</div>
+                            <div class="card-count">Graphical Solutions</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">Solving inequalities graphically with solutions.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEeI2rsisMpRFFrzsYcmjgt')">Watch →</button>
+                            <p class="card-desc">Linear inequalities, graphical representation, solution set, optimization</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhEeI2rsisMpRFFrzsYcmjgt')">Watch Playlist →</button>
                         </div>
                     </div>
                     <div class="card">
                         <div class="card-header">
                             <div class="card-icon">📐</div>
-                            <div class="card-title">Straight Lines</div>
-                            <div class="card-count">Complete</div>
+                            <div class="card-title">Chapter 10: Straight Lines</div>
+                            <div class="card-count">Equations & Angles</div>
                         </div>
                         <div class="card-body">
-                            <p class="card-desc">Equation of lines and slopes completely covered.</p>
-                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhE7VjR8T6xBUMnyL79iMrO_')">Watch →</button>
+                            <p class="card-desc">Various forms of equation of line, slope, angle between lines, distance</p>
+                            <button class="btn-card" onclick="goYT('PL2RznQnBBmhE7VjR8T6xBUMnyL79iMrO_')">Watch Playlist →</button>
                         </div>
                     </div>
                 </div>
@@ -665,7 +776,7 @@
                         </div>
                     </div>
                     <div class="card">
-                        <div class="card-header">
+                         <div class="card-header">
                             <div class="card-icon">∂</div>
                             <div class="card-title">Differential Equations</div>
                             <div class="card-count">Complete</div>
