@@ -288,14 +288,19 @@
             50% { transform: translateY(-20px); }
         }
 
-        .teacher-name {
-            font-size: 2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #ff6b6b, #ffd700);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
-        }
+       .teacher-name {
+  font-size: 2rem;
+  font-weight: 900;
+
+  color: #ff6b6b; /* fallback for unsupported browsers */
+
+  background: linear-gradient(135deg, #ff6b6b, #ffd700);
+
+  background-clip: text;          /* standard */
+  -webkit-background-clip: text;  /* required for webkit */
+
+  -webkit-text-fill-color: transparent;
+}
 
         .teacher-title {
             color: #666;
